@@ -1,0 +1,22 @@
+{
+  "name": "noveo_test_task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Belan Sergey",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "express": "^4.15.0",
+    "express-session": "^1.15.1",
+    "joi": "^10.2.2",
+    "mongodb": "^2.2.24"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "chai-http": "^1.0.0"
+  }
+}
