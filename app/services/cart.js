@@ -1,14 +1,15 @@
 /**
  * Created by sbelan on 4/19/2017.
  */
-const Product = require('../models/products');
+const ProductRepository = require('../repositories/product');
 const { ParamsError } = require('../helpers/errors');
 const { CartConstructor } = require('../helpers/constructors');
+const Product = new ProductRepository();
 
 exports.addProductToCart = (req, res) => {
   const product_id = req.body.product_id;
   const quantity = req.body.quantity;
-  Product.getProductById(product_id, (err, productObj) => {
+  Product.getById(product_id, (err, [productObj]) => {
     if (err) {
       res.sendStatus(500);
       console.error(err);
@@ -45,7 +46,7 @@ exports.addProductToCart = (req, res) => {
 exports.deleteProductFromCart = (req, res) => {
   const product_id = req.params.product_id;
   if (req.session.cart) {
-    Product.getProductById(product_id, (err, productObj) => {
+    Product.getById(product_id, (err, [productObj]) => {
       if (err) {
         res.sendStatus(500);
         console.error(err);

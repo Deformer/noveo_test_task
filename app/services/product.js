@@ -1,7 +1,8 @@
-const Product = require('../models/products');
+const ProductRepository = require('../repositories/product');
+const Product = new ProductRepository();
 
 exports.getAllProducts = (req, res) => {
-  Product.getAllProducts((err, results) => {
+  Product.getAll((err, results) => {
     if (err) {
       res.sendStatus(500);
       console.error(err);
