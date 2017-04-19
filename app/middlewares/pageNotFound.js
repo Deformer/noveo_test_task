@@ -3,6 +3,6 @@
  */
 
 const PageNotFoundError = require('../helpers/errors').PageNotFoundError;
-module.exports = (req,res,next) => {
-    res.status(400).json(new PageNotFoundError(req.originalUrl));
+module.exports = (req, res, next) => {
+  res.status(400).json(new PageNotFoundError(req.originalUrl));
 };
