@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint-fix": "eslint --fix app",
-    "start": "node app.js"
+    "start": "set PORT=3000 & node app/app.js"
   },
   "engines": {
     "node": "6.10.0",

@@ -5,17 +5,17 @@ const { CartConstructor } = require('../helpers/constructors');
 
 class CartRepository {
   constructor(store) {
-    this.cartStore = store;
+    this.store = store;
   }
 
   add(product, quantity, callback) {
     const { price, _id } = product;
     const index = this.indexOfProduct(_id);
 
-    this.cartStore.data.products_count += quantity;
-    this.cartStore.data.total_sum += quantity * price;
+    this.store.data.products_count += quantity;
+    this.store.data.total_sum += quantity * price;
     if (index === -1) {
-      this.cartStore.data.products.push({
+      this.store.data.products.push({
         id: _id,
         quantity,
         sum: quantity * price,
@@ -23,7 +23,7 @@ class CartRepository {
       callback();
       return;
     }
-    const currentProduct = this.cartStore.data.products[index];
+    const currentProduct = this.store.data.products[index];
     currentProduct.quantity += quantity;
     currentProduct.sum += quantity * price;
     callback();
@@ -36,11 +36,11 @@ class CartRepository {
       callback('Такого продукта нет в корзине');
       return;
     }
-    const currentProduct = this.cartStore.data.products[index];
-    this.cartStore.data.total_sum -= price;
-    this.cartStore.data.products_count -= 1;
+    const currentProduct = this.store.data.products[index];
+    this.store.data.total_sum -= price;
+    this.store.data.products_count -= 1;
     if (currentProduct.quantity === 1) {
-      this.cartStore.data.products.splice(index, 1);
+      this.store.data.products.splice(index, 1);
     } else {
       currentProduct.quantity -= 1;
       currentProduct.sum -= price;
@@ -48,17 +48,17 @@ class CartRepository {
     callback();
   }
 
-  get(callback) {
-    const cart = this.cartStore;
+  getAll(callback) {
+    const cart = this.store;
     if (cart) {
       callback(cart);
     } else {
-      callback(new CartConstructor([], 0));
+      callback(new CartConstructor());
     }
   }
 
   indexOfProduct(id) {
-    return this.cartStore.data.products.map(item => item.id).indexOf(id);
+    return this.store.data.products.map(item => item.id).indexOf(id);
   }
 }
 

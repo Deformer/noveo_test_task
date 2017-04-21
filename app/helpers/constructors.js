@@ -3,9 +3,9 @@
  */
 exports.CartConstructor = function (product, quantity) {
   this.data = {
-    total_sum: product === null ? 0 : product.price * quantity,
-    products_count: quantity,
-    products: product === null ? [] : [
+    total_sum: !product ? 0 : product.price * quantity,
+    products_count: !quantity ? 0 : quantity,
+    products: !product ? [] : [
       {
         id: product._id,
         quantity,

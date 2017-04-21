@@ -1,15 +1,6 @@
 /**
  * Created by sergey on 02.03.2017.
  */
-// exports.ParamsError = function (details) {
-//   this.error = {
-//     params: details.map(item => ({ name: item.path, message: item.message, code: item.type })),
-//     type: 'invalid_param_error',
-//     message: 'Invalid data parameters',
-//
-//   };
-// };
-
 class ParamsError extends Error {
   constructor(details) {
     super('Invalid data parameters');
@@ -35,9 +26,3 @@ class PageNotFoundError extends Error {
 
 module.exports = { ParamsError, PageNotFoundError };
 
-// exports.PageNotFoundError = function (url) {
-//   this.error = {
-//     type: 'invalid_request_error',
-//     message: `Unable to resolve the request ${url}.`,
-//   };
-// };
