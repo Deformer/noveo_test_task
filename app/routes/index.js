@@ -2,7 +2,8 @@
  * Created by sergey on 02.03.2017.
  */
 const router = require('express').Router();
-const { validateBody, validateParams } = require('../middlewares/validatorParams');
+const { validateParams } = require('../middlewares/validatorParams');
+const { validateBody } = require('../middlewares/validateBody');
 const ProductRepository = require('../repositories/product');
 const { CartService } = require('../services/cart');
 const { ParamsError } = require('../helpers/errors');
