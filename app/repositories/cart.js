@@ -15,14 +15,24 @@ class CartRepository {
     this.store.data.products_count += quantity;
     this.store.data.total_sum += quantity * price;
     if (index === -1) {
-      this.store.data.products.push({
-        id: _id,
-        quantity,
-        sum: quantity * price,
-      });
-      callback();
+      this.addNewProduct(product, quantity, callback);
       return;
     }
+    this.addToExistedProduct(index, product, quantity, callback);
+  }
+
+  addNewProduct(product, quantity, callback) {
+    const { price, _id } = product;
+    this.store.data.products.push({
+      id: _id,
+      quantity,
+      sum: quantity * price,
+    });
+    callback();
+  }
+
+  addToExistedProduct(index, product, quantity, callback) {
+    const { price } = product;
     const currentProduct = this.store.data.products[index];
     currentProduct.quantity += quantity;
     currentProduct.sum += quantity * price;
@@ -40,12 +50,22 @@ class CartRepository {
     this.store.data.total_sum -= price;
     this.store.data.products_count -= 1;
     if (currentProduct.quantity === 1) {
-      this.store.data.products.splice(index, 1);
+      this.removeWholeProduct(index);
     } else {
-      currentProduct.quantity -= 1;
-      currentProduct.sum -= price;
+      this.decreaseProductQuantity(index, product);
     }
     callback();
+  }
+
+  removeWholeProduct(index) {
+    this.store.data.products.splice(index, 1);
+  }
+
+  decreaseProductQuantity(index, product) {
+    const { price } = product;
+    const currentProduct = this.store.data.products[index];
+    currentProduct.quantity -= 1;
+    currentProduct.sum -= price;
   }
 
   getAll(callback) {
