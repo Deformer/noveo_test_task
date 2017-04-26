@@ -2,7 +2,7 @@
  * Created by sergey on 02.03.2017.
  */
 const Joi = require('joi');
-const { ParamsError } = require('../helpers/errors');
+const { ParamsError } = require('../../helpers/errors');
 
 const options = { abortEarly: false };
 
@@ -13,7 +13,6 @@ exports.validateParams = (req, res, next) => {
   Joi.validate(req.params, paramsSchema, options, (err, validParams) => {
     if (err) {
       res.status(400).send(new ParamsError(err.details));
-      console.error(err);
     } else {
       req.params = validParams;
       next();

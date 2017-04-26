@@ -36,3 +36,5 @@ app.use(pageNotFound);
 app.listen(port, () => {
   console.log(`Server is working ${port} port`);
 });
+
+module.exports = app;
